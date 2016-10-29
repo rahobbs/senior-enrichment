@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-export default class BonesJokes extends Component {
+import SinglePost from './SinglePost'
+
+export default class Root extends Component {
   constructor() {
     super()
     //Set an initial state of an empty array of posts
@@ -9,11 +11,9 @@ export default class BonesJokes extends Component {
     }
   }
   componentDidMount() {
-    console.log("component did mount")
     fetch('/api/posts')
     .then(res => res.json())
     .then(response => {
-      console.log("fetch response", response)
       this.setState({posts: response})
     })
   }
@@ -22,13 +22,19 @@ export default class BonesJokes extends Component {
     return (
       <div>
         <h1>welcome to not-reddit</h1>
-        {console.log("the posts inside of render", this.state.posts)}
+
+        <ul>
         {
-          // this.state.posts.length > 0 ? console.log("posts loaded") : console.log("posts not loaded")
           this.state.posts.map(function(singlePost) {
-          return <p>the post: {singlePost.url}</p>
+          return (
+                  <li key={singlePost.id}>
+                    <a href={singlePost.url}>{singlePost.title}</a><br/>
+                    <a href={"/posts/" + singlePost.id}>Comments</a>
+                  </li>
+                 )
           })
         }
+        </ul>
       </div>
     )
   }
