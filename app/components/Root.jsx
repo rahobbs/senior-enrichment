@@ -35,6 +35,7 @@ export default class Root extends Component {
           })
         }
         </ul>
+        <a href={"#/NewPostForm"}><button type="button">New Post</button></a>
       </div>
     )
   }

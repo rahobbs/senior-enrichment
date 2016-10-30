@@ -34,6 +34,7 @@ api.get('/posts/:id', function(req, res, next) {
 
 //Create a new post
 api.post('/posts', function(req, res, next) {
+  console.log('THE REQUEST BODY', req.body)
   Post.create(req.body).then(function(newPost) {
     res.send(newPost);
   }).catch(next)
