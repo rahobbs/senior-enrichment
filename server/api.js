@@ -31,6 +31,7 @@ api.get('/posts/:id', function(req, res, next) {
   })
   .catch(next)
 })
+
 //Create a new post
 api.post('/posts', function(req, res, next) {
   Post.create(req.body).then(function(newPost) {
@@ -42,6 +43,13 @@ api.post('/comments/:postId', function(req, res, next) {
   Comment.create({content: req.body.content, postId: req.params.postId})
   .then(function(newComment) {
     res.send(newComment);
+  }).catch(next)
+})
+//Get all comments for a given post
+api.get('/comments/:postId', function(req, res, next) {
+  Comment.findAll({where: {postId: req.params.postId}})
+  .then(function(allComments) {
+    res.send(allComments);
   }).catch(next)
 })
 //Delete a given post and all associated comments

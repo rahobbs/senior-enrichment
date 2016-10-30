@@ -3,24 +3,46 @@ import React, { Component } from 'react';
 export default class SinglePost extends Component {
   constructor(props) {
     super(props);
-    console.log("the props: ", props)
-    this.state = {};
+    //Initializing local state to have a post that is an empty object
+    this.state = {
+      post: {},
+      comments: []
+    };
   }
+
   componentDidMount() {
-    fetch(`/api/posts/${this.props.params.id}`)
-    .then(res => res.json())
+    var postId = this.props.params.id;
+    fetch(`/api/posts/${postId}`)
     .then(response => {
-      console.log("the response", response);
-      this.setState = response;
+      return response.json()
+    }).then( data => {
+      console.log("CDM",this.state)
+      return this.setState({post: data})
+    }).then (function() {
+      return fetch(`/api/comments/${postId}`)
+    }).then(commentResponse => {
+      return commentResponse.json()
+    }).then( commentData => {
+      console.log('the comment data', commentData)
+      return this.setState({comments: commentData})
     })
   }
 
 
   render() {
-    console.log("the state in render", this.state)
+    console.log('all the data', this.state)
     return (
       <div>
-        <h1>boo</h1>
+        <h1>{this.state.post.title}</h1>
+        <a href={this.state.post.url}>{this.state.post.url}</a><br/>
+        <p>{this.state.post.textContent}</p>
+          {
+            this.state.comments.map(function(comment) {
+            return (
+                      <p key={comment.id}>{comment.content}</p>
+                   )
+            })
+          }
       </div>
     )
   }
