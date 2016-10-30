@@ -16,21 +16,18 @@ export default class SinglePost extends Component {
     .then(response => {
       return response.json()
     }).then( data => {
-      console.log("CDM",this.state)
       return this.setState({post: data})
     }).then (function() {
       return fetch(`/api/comments/${postId}`)
     }).then(commentResponse => {
       return commentResponse.json()
     }).then( commentData => {
-      console.log('the comment data', commentData)
       return this.setState({comments: commentData})
     })
   }
 
 
   render() {
-    console.log('all the data', this.state)
     return (
       <div>
         <h1>{this.state.post.title}</h1>

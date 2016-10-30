@@ -26,22 +26,16 @@ export default class NewPostForm extends Component {
   }
 
   submitForm (currentState) {
-    //"title=title here&url=http://foo.com&textContent=stuff"
-    // var query = ''
-    // query += `"title=${currentState.title}&url=${currentState.url}&textContent=${currentState.textContent}"`
-    // console.log(query)
-    console.log("STRINGIFIED JSON", JSON.stringify(currentState))
     fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify(currentState),
       headers: {
-        "Content-type": "application/json; charset=UTF-8"  
+        "Content-type": "application/json; charset=UTF-8"
       }
     })
   }
 
   render () {
-    console.log("the data", this.state)
     return (
       <form onSubmit={() => this.submitForm(this.state)}>
         <div className="form-group">
