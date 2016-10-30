@@ -10,11 +10,9 @@ import Root from './components/Root'
 import SinglePost from './components/SinglePost'
 
 render (
-
     <Router history={hashHistory}>
-      <Route path="/" component={Root}>
-        <Route path='posts/:id' component={SinglePost} />
-      </Route>
+      <Route path="/" component={Root} />
+      <Route path='posts/:id' component={SinglePost} />
     </Router>,
   document.getElementById('main')
 )

@@ -29,7 +29,7 @@ export default class Root extends Component {
           return (
                   <li key={singlePost.id}>
                     <a href={singlePost.url}>{singlePost.title}</a><br/>
-                    <a href={"/posts/" + singlePost.id}>Comments</a>
+                    <a href={"#/posts/" + singlePost.id}>Comments</a>
                   </li>
                  )
           })
