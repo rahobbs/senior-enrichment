@@ -4,8 +4,6 @@ import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, hashHistory, Link, IndexRoute } from 'react-router'
 
-
-import store from './store'
 import Root from './components/Root'
 import SinglePost from './components/SinglePost'
 import NewPostForm from './components/NewPostForm'
